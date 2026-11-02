@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Asistente Inteligente de Ingeniería de Software</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app">
+    <aside class="rail" id="rail">
+      <h1>Asistente de Ingeniería de Software</h1>
+      <p class="sub">Pregunta en español y recibe definición, explicación, ejemplo y recomendación.</p>
+
+      <h2>Preguntas de prueba</h2>
+      <ul class="tests" id="tests">
+        <li><button data-q="¿Qué es un modelo LLM y cómo funciona?">1. ¿Qué es un LLM y cómo funciona?</button></li>
+        <li><button data-q="¿Cómo se puede integrar un LLM en una aplicación web?">2. Integrar un LLM en una app web</button></li>
+        <li><button data-q="Explica cómo utilizar IA Generativa para apoyar la ingeniería de requisitos.">3. IA generativa en requisitos</button></li>
+        <li><button data-q="Diseña cinco casos de prueba para un sistema de registro de estudiantes.">4. Cinco casos de prueba</button></li>
+        <li><button data-q="Explica qué es una API y cómo permite conectar una aplicación con un modelo de IA.">5. Qué es una API</button></li>
+        <li><button data-q="Proporciona referencias bibliográficas verificables sobre integración de LLM en aplicaciones.">6. Referencias bibliográficas</button></li>
+        <li><button data-q="¿Cómo debería ser mi aplicación?">7. Pregunta ambigua</button></li>
+      </ul>
+
+      <div class="meta">
+        <span class="pill" id="mode">{% if demo %}Modo demostración{% else %}Modelo: {{ model }}{% endif %}</span>
+        {% if form_url %}<a class="survey" href="{{ form_url }}" target="_blank" rel="noopener">Evaluar el asistente</a>{% endif %}
+      </div>
+    </aside>
+
+    <main class="chat">
+      <div class="log" id="log" aria-live="polite">
+        <div class="empty" id="empty">
+          <p class="big">Haz una pregunta de ingeniería de software.</p>
+          <p>Por ejemplo: patrones de diseño, pruebas, requisitos, metodologías ágiles, bases de datos o APIs. Las respuestas generadas por IA deben verificarse con documentación técnica.</p>
+        </div>
+      </div>
+
+      <form class="composer" id="form" autocomplete="off">
+        <textarea id="input" rows="1" maxlength="1500" placeholder="Escribe tu pregunta…" aria-label="Pregunta"></textarea>
+        <button type="submit" id="send">Enviar pregunta</button>
+        <button type="button" id="clear" class="ghost">Nueva conversación</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
