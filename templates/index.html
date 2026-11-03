@@ -28,7 +28,7 @@
 
       <div class="meta">
         <span class="pill" id="mode">{% if demo %}Modo demostración{% else %}Modelo: {{ model }}{% endif %}</span>
-        {% if form_url %}<a class="survey" href="{{ form_url }}" target="_blank" rel="noopener">Evaluar el asistente</a>{% endif %}
+        <a class="survey" href="{{ url_for('encuesta') }}">Evaluar el asistente</a>
       </div>
     </aside>
 

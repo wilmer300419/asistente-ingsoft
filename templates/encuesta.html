@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evaluar el asistente</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body{display:flex;flex-direction:column}
+    header{padding:16px clamp(16px,5vw,64px);background:var(--surface);border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+    header h1{font-size:1.15rem;margin:0}
+    header a{color:var(--teal);font-weight:500}
+    iframe{flex:1;border:0;width:100%;min-height:80vh;background:var(--surface)}
+    .msg-empty{max-width:560px;margin:48px auto;padding:0 20px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Evaluar el asistente</h1>
+    <a href="{{ url_for('index') }}">Volver al asistente</a>
+    {% if form_url %}<a href="{{ form_url }}" target="_blank" rel="noopener">Abrir encuesta en otra pestaña</a>{% endif %}
+  </header>
+  {% if embed_url %}
+    <iframe src="{{ embed_url }}" title="Encuesta de evaluación">Cargando…</iframe>
+  {% else %}
+    <div class="msg-empty">
+      <p><strong>Aún no hay un formulario configurado.</strong></p>
+      <p>Crea el formulario en Google Forms, copia su enlace y guárdalo en la variable <code>FORM_URL</code> (archivo <code>.env</code> o variables de Render). Luego reinicia la app.</p>
+    </div>
+  {% endif %}
+</body>
+</html>

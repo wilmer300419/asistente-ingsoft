@@ -4,6 +4,7 @@ const input = document.getElementById("input");
 const sendBtn = document.getElementById("send");
 const empty = document.getElementById("empty");
 
+const session = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()));
 let history = []; // [{role: "user"|"model", text}]
 
 function render(md) {
@@ -52,7 +53,7 @@ async function ask(question) {
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: question, history }),
+      body: JSON.stringify({ message: question, history, session }),
     });
     const data = await res.json();
     typing.remove();

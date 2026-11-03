@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: asistente-ingsoft
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: GEMINI_API_KEY
+        sync: false        # la pegas en el panel de Render, no en el repositorio
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: FORM_URL
+        sync: false
+      - key: ADMIN_TOKEN
+        sync: false        # token secreto para abrir /registros
+      - key: TRUST_PROXY
+        value: "1"         # usa la IP real del visitante (límite por usuario)
